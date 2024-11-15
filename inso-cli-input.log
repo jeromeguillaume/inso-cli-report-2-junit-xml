@@ -1,0 +1,36 @@
+Running request: My /anything req_7598e1b49a1a4636bfb0358efe63ef93
+[network] Response succeeded req=req_7598e1b49a1a4636bfb0358efe63ef93 status=200
+
+Test results:
+✅ Check if status is 200
+✅ Check content validity
+
+Total tests: 2
+Passed: 2
+Failed: 0
+
+
+Running request: /uuid req_9f40b2e33a054b89bf25a91262b49c71
+[network] Response succeeded req=req_9f40b2e33a054b89bf25a91262b49c71 status=200
+
+Test results:
+❌ Check if status is 500
+❌ Check if uuid is valid
+
+Total tests: 2
+Passed: 0
+Failed: 2
+
+ReferenceError: insomnia2 is not defined
+AssertionError: expected { Object (uuid) } to have property 'uuidXXX'
+Running request: /image req_f9dc3a12931d44878929c0bcdf6cf643
+[network] Response failed req=req_f9dc3a12931d44878929c0bcdf6cf643 err=Error: Couldn't resolve host name
+
+Test results:
+❌ Check if status is 200
+
+Total tests: 1
+Passed: 0
+Failed: 1
+
+TypeError: Cannot read properties of undefined (reading 'code')

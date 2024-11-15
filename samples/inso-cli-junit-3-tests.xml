@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="4" failures="2" timestamp="2024-11-15T09:00:00">
+    <testsuite name="My./anything.req_7598e1b49a1a4636bfb0358efe63ef93" tests="2" failures="0">
+        <testcase name="Check if status is 200" classname="My_/anything.req_7598e1b49a1a4636bfb0358efe63ef93" />
+        <testcase name="Check content validity" classname="My_/anything.req_7598e1b49a1a4636bfb0358efe63ef93" />
+    </testsuite>
+    <testsuite name="/uuid.req_9f40b2e33a054b89bf25a91262b49c71" tests="2">
+        <testcase name="Check if status is 500" classname="/uuid.req_9f40b2e33a054b89bf25a91262b49c71" />
+            <failure message="expected 200 to deeply equal 500" type="AssertionError" />
+        <testcase name="Check if uuid is valid" classname="/uuid.req_9f40b2e33a054b89bf25a91262b49c71" />
+            <failure message="expected { Object (uuid) } to have property 'uuidXXXX'" type="AssertionError" />
+    </testsuite>
+    <testsuite name="/image.req_f9dc3a12931d44878929c0bcdf6cf643" tests="1" failures="1">
+        <system-err>Error: Couldn't resolve host name</system-err>
+        <testcase name="Check if status is 200" classname="/image.req_f9dc3a12931d44878929c0bcdf6cf643" />
+            <failure message="Cannot read properties of undefined (reading 'code')" type="TypeError" />
+    </testsuite>
+</testsuites>
