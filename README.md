@@ -14,5 +14,5 @@ javac -d bin/ src/com/kong/insoclireport2junitxml/*
 
 ## How to run `inso-cli-report-2-junit-xml`
 ```shell
-java -cp bin com.kong.insoclireport2junitxml.InsoCliJunit inso-cli-input.log
+java -cp bin com.kong.insoclireport2junitxml.InsoCliJunit ./samples/inso-cli-input.log
 ```
