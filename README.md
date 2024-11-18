@@ -16,7 +16,7 @@ javac -d bin/ src/com/kong/insoclireport2junitxml/*
 ```shell
 java -cp bin com.kong.insoclireport2junitxml.InsoCliJunit ./samples/inso-cli-input.log
 ```
-The exit code of the program is
+The exit code of the program is:
 - `0`: no error
 - `1`: error (and the Exception stack trace is sent to `stdout`)
 
