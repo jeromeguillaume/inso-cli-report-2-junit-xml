@@ -1,4 +1,4 @@
-# inso-cli-report-2-junit-xml: inso CLI to JUnit XML
+# inso-cli-report-2-junit-xml: format `inso CLI` report to `JUnit XML`
 Format the report of the `inso CLI` collection execution into a [`JUnit XML`](https://github.com/testmoapp/junitxml) format
 
 ## Clone this repository
