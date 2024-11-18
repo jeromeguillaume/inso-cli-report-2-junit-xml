@@ -1,5 +1,5 @@
 # inso-cli-report-2-junit-xml: format `inso CLI` report to `JUnit XML`
-Format the report of the `inso CLI` collection execution into a [`JUnit XML`](https://github.com/testmoapp/junitxml) format
+Format the report of the [`inso CLI`](https://github.com/Kong/insomnia/tree/develop/packages/insomnia-inso) collection execution into a [`JUnit XML`](https://github.com/testmoapp/junitxml) format
 
 ## Clone this repository
 ```shell
