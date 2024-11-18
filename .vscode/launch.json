@@ -9,7 +9,7 @@
       "name": "Current File",
       "request": "launch",
       "mainClass": "${file}",
-      "args": "inso-cli-input.log"
+      "args": "samples/inso-cli-input.log"
     },
     {
       "type": "java",

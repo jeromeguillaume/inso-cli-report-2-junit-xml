@@ -2,10 +2,10 @@ Running request: My /anything req_7598e1b49a1a4636bfb0358efe63ef93
 [network] Response succeeded req=req_7598e1b49a1a4636bfb0358efe63ef93 status=200
 
 Test results:
-✅ Check if status is <200>
-❌ Check if status is <500>
-✅ Check content validity with "json" key
-❌ Check content validity with "json2" key
+✅ Check if status is 200
+❌ Check if status is 500
+✅ Check content validity with 'json' key
+❌ Check content validity with 'json2' key
 
 Total tests: 4
 Passed: 2
