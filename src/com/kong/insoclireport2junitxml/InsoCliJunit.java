@@ -3,34 +3,69 @@ package com.kong.insoclireport2junitxml;
 public class InsoCliJunit {
   
   public static void main(String[] args) throws Exception {
-    boolean   rc        = true;
-    InsoTool  insoTool  = new InsoTool();
+    InsoTool  insoTool      = new InsoTool();
+    boolean   rc            = true;
+    boolean   bHelp         = false;
+    boolean   breplaceBlank = false;
+    String    inputFile     = "";
+    String    outputFile    = "";
     
     try {
-      if (args.length == 0){
+      int nb =  0;
+      while (nb < args.length) {
+        if (args[nb].compareToIgnoreCase("--help") == 0){
+          bHelp = true;
+        }
+        else if (args[nb].compareToIgnoreCase("--input") == 0){
+          if (nb + 1 < args.length) {
+            nb++;
+            inputFile = args[nb];
+          }        
+        }
+        else if (args[nb].compareToIgnoreCase("--output") == 0){
+          if (nb + 1 < args.length) {
+            nb++;
+            outputFile = args[nb];
+          }        
+        }
+        else if (args[nb].compareToIgnoreCase("--replaceBlank") == 0){
+          breplaceBlank = true;
+        }
+        nb++;
+      }
+      if (args.length == 0 || bHelp || inputFile.isEmpty()){
         rc = false;
-        System.out.println("Usage: java insoCliJunit [inso-cli-input]");
+        System.out.println("Usage: java insoCliJunit [command] [options]");
         System.out.println("");
-        System.out.println("With this tool you can convert the 'inso cli' input into an XML JUnit format.");
-        System.out.println("The 'inso-cli-input' is returned by calling 'inso run collection' (For instance: 'inso run collection wrk_XYZ > inso-cli-input.log')");
+        System.out.println("With this tool you can convert the 'inso CLI' report into a JUnit XML format");
+        System.out.println("The 'inso CLI' report is returned by calling 'inso run collection' (For instance: 'inso run collection wrk_XYZ > inso-cli-report.log')");
         System.out.println("");
-        System.out.println("  Example:");
-        System.out.println("  $ java insoCliJunit inso-cli-input.log");
+        System.out.println("  Examples:");
+        System.out.println("  $ java insoCliJunit --input inso-cli-report.log");
+        System.out.println("  $ java insoCliJunit --input inso-cli-report.log --output inso-cli-junit.xml");
+        System.out.println("");
+        System.out.println("Available Commands:");
+        System.out.println("  --input          'inso CLI' report file");
+        System.out.println("  --help           Display help");
+        System.out.println("");
+        System.out.println("Available Options:");
+        System.out.println("  --output         'JUnit XML' file. If omitted, the standard out ('stdout') is used");
+        System.out.println("  --replaceBlank    Replace the blank ' ' character by '_' in the 'name' XML attribute");
       }
 
       // Read the 'inso CLI' input file and put it in the memory
       if (rc){
-        rc = insoTool.readInsoIntput (args[0]);
+        rc = insoTool.readInsoIntput (inputFile);
       }
 
       // Convert the 'inso CLI' lines into JUnit XML
       if (rc){
-        rc = insoTool.convertInsoLogToXML ();
+        rc = insoTool.convertInsoLogToXML (breplaceBlank);
       }
       
       // Dump the JUnit XML in the Console or in a File
       if (rc){
-        rc = insoTool.dumpXML();
+        rc = insoTool.dumpXML(outputFile);
       }
       
       // If successful, return 0

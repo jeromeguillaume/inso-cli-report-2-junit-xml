@@ -80,19 +80,19 @@ public class InsoTool {
   //---------------------------------------------------------
   // Read the 'inso CLI' input file and put it in the memory 
   //---------------------------------------------------------
-  public boolean readInsoIntput (String fileName)
+  public boolean readInsoIntput (String insoReportFileName)
   {
     boolean rc = true;
     
     try {
       // Put in an ArrayList the content of the 'inso CLI' input
-      List<String> lines = Files.readAllLines(Paths.get(fileName));
+      List<String> lines = Files.readAllLines(Paths.get(insoReportFileName));
       for (String line : lines) {
         this.linesInsoInput.add(line);
       }
 
       // Get the creation Time of the 'inso CLI' input
-      Path filePath = Paths.get(fileName);
+      Path filePath = Paths.get(insoReportFileName);
       // Get the basic file attributes
       BasicFileAttributes attributes = Files.readAttributes(filePath, BasicFileAttributes.class);
       // Get the creation time, last modified time, and last access time
@@ -122,7 +122,7 @@ public class InsoTool {
   //-----------------------------------------------
   // Convert the 'inso CLI' lines into a JUnit XML
   //-----------------------------------------------
-  public boolean convertInsoLogToXML() throws Exception
+  public boolean convertInsoLogToXML(boolean breplaceBlank) throws Exception
   {  
     boolean             rc                = true;
     boolean             bTCFound          = false;
@@ -173,8 +173,15 @@ public class InsoTool {
           testSuiteName = "";
           // Replace ' ' by '_' except for the last word that is separeted by '.'
           for (nb = 0; nb < words.length; nb++)
-          {            
-            sep = (nb == 0) ? "" : (nb == words.length - 1) ? "." : "_";
+          {
+            if (breplaceBlank) {
+              sep = (nb == 0) ? "" : (nb == words.length - 1) ? "." : "_";
+            }
+            else
+            {
+              sep = (nb == 0) ? "" : (nb == words.length - 1) ? "." : " ";
+            }
+            
             testSuiteName += sep + words[nb];
           }
           if (!testSuiteName.isEmpty()) {
@@ -389,7 +396,7 @@ public class InsoTool {
   //------------------------------------------------
   // Dump the JUnit XML in the Console or in a File
   //------------------------------------------------
-  public boolean dumpXML () throws Exception
+  public boolean dumpXML (String junitXMLFileName) throws Exception
   {
     boolean rc = true;
 
@@ -404,13 +411,16 @@ public class InsoTool {
       
       DOMSource source = new DOMSource(this.doc);
 
-      // Output XML to console for testing
-      StreamResult result = new StreamResult(new File("inso-cli-junit.xml"));
-      transformer.transform(source, result);
-
-      // Output to console for testing
-      StreamResult consoleResult = new StreamResult(System.out);
-      transformer.transform(source, consoleResult);
+      if (junitXMLFileName.isEmpty()){
+        // Output XML to the Standard Out
+        StreamResult consoleResult = new StreamResult(System.out);
+        transformer.transform(source, consoleResult);
+      }
+      else{
+        // Output XML to a File
+        StreamResult result = new StreamResult(new File(junitXMLFileName));
+        transformer.transform(source, result);
+      }      
     } catch (Exception e) {
       rc = false;
       e.printStackTrace();
