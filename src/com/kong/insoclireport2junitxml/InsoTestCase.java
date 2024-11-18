@@ -1,4 +1,4 @@
-package com.kong.InsoCliReporterJunitXML;
+package com.kong.insoclireport2junitxml;
 
 public class InsoTestCase {
   

@@ -1,5 +1,5 @@
-package com.kong.InsoCliReporterJunitXML;
-import com.kong.InsoCliReporterJunitXML.InsoTestCase;
+package com.kong.insoclireport2junitxml;
+import com.kong.insoclireport2junitxml.InsoTestCase;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;

@@ -1,13 +1,13 @@
 # inso-cli-report-2-junit-xml
 
-## How to build JAVA `InsoCliReporterJunitXML`
+## How to build JAVA `inso-cli-report-2-junit-xml`
 ```shell
-cd [home]/inso-cli-report
-javac -d bin/ src/com/kong/InsoCliReporterJunitXML/*
+cd [home]/inso-cli-report-2-junit-xml
+javac -d bin/ src/com/kong/insoclireport2junitxml/*
 ```
 
-## How to run JAVA `InsoCliReporterJunitXML`
+## How to run JAVA `inso-cli-report-2-junit-xml`
 ```shell
-cd [home]/inso-cli-report
-java -cp bin com.kong.InsoCliReporterJunitXML.InsoCliJunit inso-cli-input.log
+cd [home]/inso-cli-report-2-junit-xml
+java -cp bin com.kong.insoclireport2junitxml.InsoCliJunit inso-cli-input.log
 ```
