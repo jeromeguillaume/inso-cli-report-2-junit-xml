@@ -1,3 +1,5 @@
+package com.kong.InsoCliReporterJunitXML;
+import com.kong.InsoCliReporterJunitXML.InsoTestCase;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,8 +20,10 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-public class insoCliJunit {
+public class InsoCliJunit {
 
   // String declaration for strcuturing the 'inso CLI' input
   private String insoRunningReq     = "Running request: ";
@@ -48,21 +52,25 @@ public class insoCliJunit {
       return rc;
   }
   public static void main(String[] args) throws Exception {
-    boolean       rc              = true;
-    insoCliJunit  insoCliJunit    = new insoCliJunit ();
-    List<String>  linesInsoInput  = new ArrayList<>();
-    List<String>  testResults     = new ArrayList<>();
-    Attr          attr            = null;
-    Element       testSuite       = null;
-    Element       testCase        = null;
-    Element       sysErr          = null;
-    String        lineInso        = "";
-    String        testSuiteName   = "";
-    String        sep             = "";
-    String        tmplineInso     = "";
-    String[]      words           = null;
-    int           nb              = 0;
-    int           index           = 0;
+    boolean             rc              = true;
+    boolean             bTCFound        = false;
+    InsoCliJunit        insoCliJunit    = new InsoCliJunit();
+    List<String>        linesInsoInput  = new ArrayList<>();
+    List<InsoTestCase>  insoTestcases   = new ArrayList<>();
+    Attr                attr            = null;
+    Element             testSuite       = null;
+    Element             testCase        = null;
+    Element             sysErr          = null;
+    Element             failure         = null;
+    String              lineInso        = "";
+    String              testSuiteName   = "";
+    String              sep             = "";
+    String              tmplineInso     = "";
+    String[]            words           = null;
+    int                 nb              = 0;
+    int                 nb2             = 0;
+    int                 index           = 0;
+    int                 indexError      = 0;
     
     if (args.length == 0){
       rc = false;
@@ -153,14 +161,13 @@ public class insoCliJunit {
           testSuite.appendChild(sysErr);
           sysErr.appendChild(doc.createTextNode(lineInso.substring(index + insoCliJunit.insoErrRes.length())));          
         }
-        
         //-----------------------------------------------------------
         // Else If the line starts with: "Test results:"
         //-----------------------------------------------------------        
         else if (lineInso.startsWith(insoCliJunit.insoTestResults)){
-          testResults.clear();
+          insoTestcases.clear();
 
-          // Parse and structure all 'Test results'
+          // Parse and structure all 'Test results' associated to the <testsuite>
           while (iteratorLineInso.hasNext() && executeNext) {
             
             // Get next inso line
@@ -179,7 +186,7 @@ public class insoCliJunit {
               if (lineInso.length() < 2 ||
                   ( !lineInso.startsWith("✅ ") &&
                     !lineInso.startsWith("❌ "))) { 
-                throw new Exception("Line #" + nbLine + " invalid '" + insoCliJunit.insoTestResults + "' Found: '" + lineInso + "'");
+                throw new Exception("Line #" + nbLine + "' Found: '" + lineInso + "' invalid '" + insoCliJunit.insoTestResults);
               }
               tmplineInso = lineInso.substring(2);
               // Adding 'name' and 'classname' attributes to <testcase>
@@ -188,10 +195,10 @@ public class insoCliJunit {
               testCase.setAttributeNode(attr);
               attr = doc.createAttribute("classname");
               attr.setValue(testSuiteName);
-              testCase.setAttributeNode(attr);              
+              testCase.setAttributeNode(attr);
               
               // Add the result to internal List
-              testResults.add(lineInso);
+              insoTestcases.add(new InsoTestCase(tmplineInso, lineInso.startsWith("✅ ")));
               
             }
             // Else it's the end of the 'Test Results' section
@@ -232,17 +239,81 @@ public class insoCliJunit {
         //------------------------------------------------------------       
         else if (lineInso.matches(insoCliJunit.insoRegExErrorTest)) 
         {
-          System.out.println("**Jerome match LineInso=" + lineInso);
-          Pattern pattern = Pattern.compile(insoCliJunit.insoRegExErrorTest);
-          Matcher matcher = pattern.matcher(lineInso);
+          System.out.println("***Error: " + lineInso);
+          indexError = 0;
+          NodeList nList = testSuite.getElementsByTagName("testcase");
 
-          if (matcher.matches()) {
-            System.out.println("Found match: " + matcher.group(1));
-            System.out.println("Found match: " + matcher.group(2));
-          }
-          /*while (matcher.find()) {
-              System.out.println("Found match: " + matcher.group());
-          }*/
+          // Parse and structure all "***Error: "
+          while (executeNext) {
+            
+            // If the line starts with: "***Error: "
+            if (lineInso.matches(insoCliJunit.insoRegExErrorTest)){
+              
+              Pattern pattern = Pattern.compile(insoCliJunit.insoRegExErrorTest);
+              Matcher matcher = pattern.matcher(lineInso);
+              if (!matcher.matches() || matcher.groupCount() != 2) {
+                throw new Exception("Line #" + nbLine + " Found: '" + lineInso + "' invalid 'Error'");
+              }
+              if (testSuite == null){
+                throw new Exception("Line #" + nbLine + " invalid 'testSuite' Java object");
+              }
+              bTCFound  = false;
+              nb        = 0;
+              nb2       = 0;
+              // Find the nth iteration of 'failed' <testcase> in the 'insoTestcases' <List>
+              for (InsoTestCase insoTestcase : insoTestcases) {
+                // If the 'test' is failed
+                if (!insoTestcase.getPassed()){
+                  //  If the nth iteration is found
+                  if (nb == indexError) {
+                    bTCFound = true;
+                    break;
+                  }
+                  nb++;
+                }
+                nb2++;
+              }
+              if (!bTCFound) {
+                throw new Exception("Line #" + nbLine + " unable to find the '" + indexError + "' indexError of 'failed' tests in the 'insoTestcases' <List>");
+              }
+              
+              // If the nb2 can't match with the number of <testcase>
+              if (nb2 >= nList.getLength()) {
+                throw new Exception("Line #" + nbLine + " invalid number: '" + nb + "' in <testcase> list");
+              }
+              Node nTestCase = nList.item(nb2);
+              if (nTestCase.getNodeType() != Node.ELEMENT_NODE) {
+                throw new Exception("Line #" + nbLine + " invalid 'NodeType': '" + nTestCase.getNodeType() + "'");
+              }
+              Element eElement = (Element) nTestCase;
+              System.out.println("Test Case Name : " + eElement.getAttribute("name"));
+
+              // Appending <failure> element to the <testcase> element
+              failure = doc.createElement("failure");
+              nTestCase.appendChild(failure);
+              
+              // Setting 'message' and 'type' attributes to the <failure> element
+              attr = doc.createAttribute("message");
+              attr.setValue(matcher.group(2));
+              failure.setAttributeNode(attr);
+              
+              // Go on next Error
+              indexError++;
+              
+              // Get next inso line
+              if (iteratorLineInso.hasNext()) {
+                lineInso = iteratorLineInso.next();
+                nbLine++;
+              }
+              else{
+                executeNext = false;
+              }              
+            }
+            // Else it's the end of the '***Error: ' section (and now we are at "Running request: " level or at the End of file)
+            else{
+              executeNext = false;
+            }            
+          }                  
         }
       }
 
