@@ -30,6 +30,9 @@ How to get the exit code for:
 - MacOs: `$?`
 
 ## Example
+See full example:
+- `inso CLI` input: [inso-cli-report.log](/samples/inso-cli-report.log)
+- `JUnit XML` output: [inso-cli-junit.xml](/samples/inso-cli-junit.xml)
 ### Inso Test passed
 |Input: `inso CLI`|Output: `JUnit XML`|
 |:---------|:----------|
