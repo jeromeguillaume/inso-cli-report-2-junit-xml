@@ -37,17 +37,17 @@ See full example:
 |Input: `inso CLI`|Output: `JUnit XML`|
 |:---------|:----------|
 |Running request: /uuid req_328aa65514994e33a6287942f6dee874|`<testsuite failures="0" name="/uuid.req_328aa65514994e33a6287942f6dee874" tests="1">`|
-|✅ Check if status is 200|`<testcase classname="/uuid.req_328aa65514994e33a6287942f6dee874" name="Check if status is 200">`|
+|✅ Check if status is 200|&ensp;&ensp;&ensp;`<testcase classname="/uuid.req_328aa65514994e33a6287942f6dee874" name="Check if status is 200">`|
 
 ### Inso Test failed
 |Input: `inso CLI`|Output: `JUnit XML`|
 |:---------|:----------|
 |My /anything req_f80d5f794ca54e9e99c558f4f64525fe|`<testsuite failures="1" name="My /anything.req_f80d5f794ca54e9e99c558f4f64525fe" tests="1">`|
 |❌ Check if status is 200|`<testcase classname="My /anything.req_f80d5f794ca54e9e99c558f4f64525fe" name="Check if status is 200">`|
-||`...<failure message="expected 200 to deeply equal 500" type="AssertionError"/>`|
+||`&ensp;&ensp;&ensp;<failure message="expected 200 to deeply equal 500" type="AssertionError"/>`|
 
 ### Inso Network Response failed
 |Input: `inso CLI`|Output: `JUnit XML`|
 |:---------|:----------|
 |Running request: /uuid req_50a8af2d27cf4a1db623a5595e5bcfef|`<testsuite failures="1" name="/uuid.req_50a8af2d27cf4a1db623a5595e5bcfef" tests="1">`|
-|[network] Response failed req=req_50a8af2d27cf4a1db623a5595e5bcfef err=Error: Couldn't resolve host name|`...<system-err>Error: Couldn't resolve host name</system-err>`|
+|[network] Response failed req=req_50a8af2d27cf4a1db623a5595e5bcfef err=Error: Couldn't resolve host name|&ensp;&ensp;&ensp;`<system-err>Error: Couldn't resolve host name</system-err>`|
