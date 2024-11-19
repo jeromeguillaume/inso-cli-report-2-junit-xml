@@ -30,84 +30,21 @@ How to get the exit code for:
 - MacOs: `$?`
 
 ## Example
-|`ìnso CLI`|`JUnit XML`|
-|:-|:-|
-|```
-Running request: /uuid req_328aa65514994e33a6287942f6dee874
-[network] Response succeeded req=req_328aa65514994e33a6287942f6dee874 status=200
+### Inso Test passed
+|Input: `inso CLI`|Output: `JUnit XML`|
+|:---------|:----------|
+|Running request: /uuid req_328aa65514994e33a6287942f6dee874|`<testsuite failures="0" name="/uuid.req_328aa65514994e33a6287942f6dee874" tests="1">`|
+|✅ Check if status is 200|`<testcase classname="/uuid.req_328aa65514994e33a6287942f6dee874" name="Check if status is 200">`|
 
-Test results:
-❌ Check if status is 200
-❌ Check if uuid is valid
+### Inso Test failed
+|Input: `inso CLI`|Output: `JUnit XML`|
+|:---------|:----------|
+|My /anything req_f80d5f794ca54e9e99c558f4f64525fe|`<testsuite failures="1" name="My /anything.req_f80d5f794ca54e9e99c558f4f64525fe" tests="1">`|
+|❌ Check if status is 200|`<testcase classname="My /anything.req_f80d5f794ca54e9e99c558f4f64525fe" name="Check if status is 200">`|
+||`...<failure message="expected 200 to deeply equal 500" type="AssertionError"/>`|
 
-Total tests: 2
-Passed: 0
-Failed: 2
-
-ReferenceError: insomnia2 is not defined
-AssertionError: expected { Object (uuid) } to have property 'uuidXXX'
-Running request: Invalid Hostname /uuid req_50a8af2d27cf4a1db623a5595e5bcfef
-[network] Response failed req=req_50a8af2d27cf4a1db623a5595e5bcfef err=Error: Couldn't resolve host name
-
-Test results:
-❌ Check if status is 200
-
-Total tests: 1
-Passed: 0
-Failed: 1
-
-TypeError: Cannot read properties of undefined (reading 'code')
-Running request: /image req_93d29e2006d04e1796a15aa456dd6e68
-[network] Response succeeded req=req_93d29e2006d04e1796a15aa456dd6e68 status=200
-
-Test results:
-✅ Check if status is 200
-
-Total tests: 1
-Passed: 1
-Failed: 0
-
-
-Running request: My /anything req_f80d5f794ca54e9e99c558f4f64525fe
-[network] Response succeeded req=req_f80d5f794ca54e9e99c558f4f64525fe status=200
-
-Test results:
-❌ Check if status is 500
-❌ Check content validity with 'json2' key
-
-Total tests: 2
-Passed: 0
-Failed: 2
-
-AssertionError: expected 200 to deeply equal 500
-AssertionError: expected { args: {}, …(8) } to have key 'json2'
-```|```xml
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuites failed="5" tests="6" timestamp="2024-11-19T15:12:23">
-    <testsuite failures="2" name="/uuid.req_328aa65514994e33a6287942f6dee874" tests="2">
-        <testcase classname="/uuid.req_328aa65514994e33a6287942f6dee874" name="Check if status is 200">
-            <failure message="insomnia2 is not defined" type="ReferenceError"/>
-        </testcase>
-        <testcase classname="/uuid.req_328aa65514994e33a6287942f6dee874" name="Check if uuid is valid">
-            <failure message="expected { Object (uuid) } to have property 'uuidXXX'" type="AssertionError"/>
-        </testcase>
-    </testsuite>
-    <testsuite failures="1" name="Invalid Hostname /uuid.req_50a8af2d27cf4a1db623a5595e5bcfef" tests="1">
-        <system-err>Error: Couldn't resolve host name</system-err>
-        <testcase classname="Invalid Hostname /uuid.req_50a8af2d27cf4a1db623a5595e5bcfef" name="Check if status is 200">
-            <failure message="Cannot read properties of undefined (reading 'code')" type="TypeError"/>
-        </testcase>
-    </testsuite>
-    <testsuite failures="0" name="/image.req_93d29e2006d04e1796a15aa456dd6e68" tests="1">
-        <testcase classname="/image.req_93d29e2006d04e1796a15aa456dd6e68" name="Check if status is 200"/>
-    </testsuite>
-    <testsuite failures="2" name="My /anything.req_f80d5f794ca54e9e99c558f4f64525fe" tests="2">
-        <testcase classname="My /anything.req_f80d5f794ca54e9e99c558f4f64525fe" name="Check if status is 500">
-            <failure message="expected 200 to deeply equal 500" type="AssertionError"/>
-        </testcase>
-        <testcase classname="My /anything.req_f80d5f794ca54e9e99c558f4f64525fe" name="Check content validity with 'json2' key">
-            <failure message="expected { args: {}, …(8) } to have key 'json2'" type="AssertionError"/>
-        </testcase>
-    </testsuite>
-</testsuites>
-```|
+### Inso Network Response failed
+|Input: `inso CLI`|Output: `JUnit XML`|
+|:---------|:----------|
+|Running request: /uuid req_50a8af2d27cf4a1db623a5595e5bcfef|`<testsuite failures="1" name="/uuid.req_50a8af2d27cf4a1db623a5595e5bcfef" tests="1">`|
+|[network] Response failed req=req_50a8af2d27cf4a1db623a5595e5bcfef err=Error: Couldn't resolve host name|`...<system-err>Error: Couldn't resolve host name</system-err>`|
