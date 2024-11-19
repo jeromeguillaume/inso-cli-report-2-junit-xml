@@ -43,8 +43,8 @@ See full example:
 |Input: `inso CLI`|Output: `JUnit XML`|
 |:---------|:----------|
 |My /anything req_f80d5f794ca54e9e99c558f4f64525fe|`<testsuite failures="1" name="My /anything.req_f80d5f794ca54e9e99c558f4f64525fe" tests="1">`|
-|❌ Check if status is 200|`<testcase classname="My /anything.req_f80d5f794ca54e9e99c558f4f64525fe" name="Check if status is 200">`|
-||`&ensp;&ensp;&ensp;<failure message="expected 200 to deeply equal 500" type="AssertionError"/>`|
+|❌ Check if status is 200|&ensp;&ensp;&ensp;`<testcase classname="My /anything.req_f80d5f794ca54e9e99c558f4f64525fe" name="Check if status is 200">`|
+||&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;`<failure message="expected 200 to deeply equal 500" type="AssertionError"/>`|
 
 ### Inso Network Response failed
 |Input: `inso CLI`|Output: `JUnit XML`|
