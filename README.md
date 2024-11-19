@@ -1,6 +1,10 @@
 # Convert `inso CLI` report to `JUnit XML`
 Convert the report of the [`inso CLI`](https://github.com/Kong/insomnia/tree/develop/packages/insomnia-inso) collection execution into a [`JUnit XML`](https://github.com/testmoapp/junitxml) format
 
+## Pre-requisites
+1) `inso CLI`: version 10.1.1+
+2) `java` and `javac`: version 19
+
 ## Clone this repository
 ```shell
 git clone https://github.com/jeromeguillaume/inso-cli-report-2-junit-xml.git
@@ -15,7 +19,7 @@ jar --create --file bin/InsoCliJunit.jar --manifest bin/META-INF/MANIFEST.MF -C 
 
 ## How to run `inso-cli-report-2-junit-xml`
 ```shell
-java -jar bin/InsoCliJunit.jar --input ./samples/inso-cli-report.log
+java -jar bin/InsoCliJunit.jar --input ./samples/inso-cli-report.log --output ./samples/inso-cli-junit.xml
 ```
 The exit code of the program is:
 - `0`: no error
