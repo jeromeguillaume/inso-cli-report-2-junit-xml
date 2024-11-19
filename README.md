@@ -15,9 +15,6 @@ jar --create --file bin/InsoCliJunit.jar --manifest bin/META-INF/MANIFEST.MF -C 
 
 ## How to run `inso-cli-report-2-junit-xml`
 ```shell
-cd ./inso-cli-report-2-junit-xml
-```
-```shell
 java -jar bin/InsoCliJunit.jar ./samples/inso-cli-input.log
 ```
 The exit code of the program is:
