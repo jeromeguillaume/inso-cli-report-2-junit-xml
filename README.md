@@ -9,11 +9,8 @@ cd ./inso-cli-report-2-junit-xml
 
 ## How to build `inso-cli-report-2-junit-xml`
 ```shell
-cd bin
-```
-```shell
-javac -d src/com/kong/insoclireport2junitxml/*
-jar -cmvf META-INF/MANIFEST.MF InsoCliJunit.jar *
+javac -d bin ./src/com/kong/insoclireport2junitxml/*
+jar --create --file bin/InsoCliJunit.jar --manifest bin/META-INF/MANIFEST.MF -C bin/ .
 ```
 
 ## How to run `inso-cli-report-2-junit-xml`
