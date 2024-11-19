@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuites failed="5" tests="6" timestamp="2024-11-19T15:12:23">
+    <testsuite failures="2" name="/uuid.req_328aa65514994e33a6287942f6dee874" tests="2">
+        <testcase classname="/uuid.req_328aa65514994e33a6287942f6dee874" name="Check if status is 200">
+            <failure message="insomnia2 is not defined" type="ReferenceError"/>
+        </testcase>
+        <testcase classname="/uuid.req_328aa65514994e33a6287942f6dee874" name="Check if uuid is valid">
+            <failure message="expected { Object (uuid) } to have property 'uuidXXX'" type="AssertionError"/>
+        </testcase>
+    </testsuite>
+    <testsuite failures="1" name="Invalid Hostname /uuid.req_50a8af2d27cf4a1db623a5595e5bcfef" tests="1">
+        <system-err>Error: Couldn't resolve host name</system-err>
+        <testcase classname="Invalid Hostname /uuid.req_50a8af2d27cf4a1db623a5595e5bcfef" name="Check if status is 200">
+            <failure message="Cannot read properties of undefined (reading 'code')" type="TypeError"/>
+        </testcase>
+    </testsuite>
+    <testsuite failures="0" name="/image.req_93d29e2006d04e1796a15aa456dd6e68" tests="1">
+        <testcase classname="/image.req_93d29e2006d04e1796a15aa456dd6e68" name="Check if status is 200"/>
+    </testsuite>
+    <testsuite failures="2" name="My /anything.req_f80d5f794ca54e9e99c558f4f64525fe" tests="2">
+        <testcase classname="My /anything.req_f80d5f794ca54e9e99c558f4f64525fe" name="Check if status is 500">
+            <failure message="expected 200 to deeply equal 500" type="AssertionError"/>
+        </testcase>
+        <testcase classname="My /anything.req_f80d5f794ca54e9e99c558f4f64525fe" name="Check content validity with 'json2' key">
+            <failure message="expected { args: {}, …(8) } to have key 'json2'" type="AssertionError"/>
+        </testcase>
+    </testsuite>
+</testsuites>
