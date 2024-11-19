@@ -29,7 +29,7 @@ How to get the exit code for:
 - Windows: `%ERRORLEVEL%`
 - Linux/MacOs: `$?`
 
-## Example
+## Example of conversion
 See full example:
 - `inso CLI` input: [inso-cli-report.log](/samples/inso-cli-report.log)
 - `JUnit XML` output: [inso-cli-junit.xml](/samples/inso-cli-junit.xml)
