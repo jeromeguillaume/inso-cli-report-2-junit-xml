@@ -27,7 +27,7 @@ The exit code of the program is:
 
 How to get the exit code for:
 - Windows: `%ERRORLEVEL%`
-- MacOs: `$?`
+- Linux/MacOs: `$?`
 
 ## Example
 See full example:

@@ -1,0 +1,13 @@
+Running request: /uuid req_328aa65514994e33a6287942f6dee874
+[network] Response failed req=req_328aa65514994e33a6287942f6dee874
+
+Test results:
+❌ Check if status is 200
+❌ Check if uuid is valid
+
+Total tests: 2
+Passed: 0
+Failed: 2
+
+TypeError: Cannot read properties of undefined (reading 'code')
+TypeError: Cannot read properties of undefined (reading 'json')

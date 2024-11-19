@@ -1,0 +1,10 @@
+Test results:
+❌ Check if status is 200
+❌ Check if uuid is valid
+
+Total tests: 2
+Passed: 0
+Failed: 2
+
+TypeError: Cannot read properties of undefined (reading 'code')
+TypeError: Cannot read properties of undefined (reading 'json')

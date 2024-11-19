@@ -1,0 +1,39 @@
+Running request: /uuid req_328aa65514994e33a6287942f6dee874
+[network] Response failed req=req_328aa65514994e33a6287942f6dee874 err=Error: Couldn't resolve host name
+
+Test results:
+❌ Check if status is 200
+❌ Check if uuid is valid
+
+Total tests: 2
+Passed: 0
+Failed: 2
+
+TypeError: Cannot read properties of undefined (reading 'code')
+TypeError: Cannot read properties of undefined (reading 'json')
+Running request: /image req_93d29e2006d04e1796a15aa456dd6e68
+[network] Response succeeded req=req_93d29e2006d04e1796a15aa456dd6e68 status=200
+
+Test results:
+✅ Check if status is 200
+
+Total tests: 1
+Passed: 1
+Failed: 0
+
+
+Running request: My /anything req_f80d5f794ca54e9e99c558f4f64525fe
+[network] Response succeeded req=req_f80d5f794ca54e9e99c558f4f64525fe status=200
+
+Test results:
+✅ Check if status is 200
+❌ Check if status is 200
+✅ Check content validity with 'json' key
+❌ Check content validity with 'json2' key
+
+Total tests: 4
+Passed: 2
+Failed: 2
+
+AssertionError: expected 200 to deeply equal 500
+AssertionError: expected { args: {}, …(8) } to have key 'json2'

@@ -1,0 +1,26 @@
+BEGIN 01-Successfull_conversion_w/o_failed
+END   01-Successfull_conversion_w/o_failed => Result: ✅
+BEGIN 02-Successfull_conversion_w_failed
+END   02-Successfull_conversion_w_failed => Result: ✅
+BEGIN 03-inso_cli_empty_file
+END   03-inso_cli_empty_file => Result: ✅
+BEGIN 04-inso_invalid_no_Running_request_for_[network]_Response_failed
+java.lang.Exception: Line #1: Found '[network] Response failed' but there is no 'testsuite'
+	at com.kong.insoclireport2junitxml.InsoTool.convertInsoLogToXML(InsoTool.java:202)
+	at com.kong.insoclireport2junitxml.InsoCliJunit.main(InsoCliJunit.java:76)
+END   04-inso_invalid_no_Running_request_for_[network]_Response_failed => Result: ✅
+BEGIN 05-inso_invalid_[network]_Response_failed_without_err
+java.lang.Exception: Line #2: Found '[network] Response failed' but there is no 'err=' detail
+	at com.kong.insoclireport2junitxml.InsoTool.convertInsoLogToXML(InsoTool.java:209)
+	at com.kong.insoclireport2junitxml.InsoCliJunit.main(InsoCliJunit.java:76)
+END   05-inso_invalid_[network]_Response_failed_without_err => Result: ✅
+BEGIN 06-inso_invalid_Test_results_without_Running_request
+java.lang.Exception: Line #2 invalid 'testSuite' Java object
+	at com.kong.insoclireport2junitxml.InsoTool.convertInsoLogToXML(InsoTool.java:235)
+	at com.kong.insoclireport2junitxml.InsoCliJunit.main(InsoCliJunit.java:76)
+END   06-inso_invalid_Test_results_without_Running_request => Result: ✅
+BEGIN 07-inso_invalid_Test_results_type
+java.lang.Exception: Line #5' Found: 'X Check if status is 200' invalid 'Test results:
+	at com.kong.insoclireport2junitxml.InsoTool.convertInsoLogToXML(InsoTool.java:242)
+	at com.kong.insoclireport2junitxml.InsoCliJunit.main(InsoCliJunit.java:76)
+END   07-inso_invalid_Test_results_type => Result: ✅
