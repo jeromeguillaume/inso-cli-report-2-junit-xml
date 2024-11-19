@@ -9,12 +9,19 @@ cd ./inso-cli-report-2-junit-xml
 
 ## How to build `inso-cli-report-2-junit-xml`
 ```shell
+cd bin
+```
+```shell
 javac -d bin/ src/com/kong/insoclireport2junitxml/*
+jar -cmvf bin/META-INF/MANIFEST.MF bin/InsoCliJunit.jar bin/*
 ```
 
 ## How to run `inso-cli-report-2-junit-xml`
 ```shell
-java -cp bin com.kong.insoclireport2junitxml.InsoCliJunit ./samples/inso-cli-input.log
+cd ./inso-cli-report-2-junit-xml
+```
+```shell
+java -jar bin/InsoCliJunit.jar ./samples/inso-cli-input.log
 ```
 The exit code of the program is:
 - `0`: no error

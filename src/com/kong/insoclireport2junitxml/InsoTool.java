@@ -122,7 +122,7 @@ public class InsoTool {
   //-----------------------------------------------
   // Convert the 'inso CLI' lines into a JUnit XML
   //-----------------------------------------------
-  public boolean convertInsoLogToXML(boolean breplaceBlank) throws Exception
+  public boolean convertInsoLogToXML(boolean bReplaceBlank) throws Exception
   {  
     boolean             rc                = true;
     boolean             bTCFound          = false;
@@ -174,7 +174,7 @@ public class InsoTool {
           // Replace ' ' by '_' except for the last word that is separeted by '.'
           for (nb = 0; nb < words.length; nb++)
           {
-            if (breplaceBlank) {
+            if (bReplaceBlank) {
               sep = (nb == 0) ? "" : (nb == words.length - 1) ? "." : "_";
             }
             else
