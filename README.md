@@ -67,7 +67,7 @@ See full example:
 
 ## How to test the converter
 ```shell
-cd ./inso-cli-report-2-junit-xml/tests
+cd ./tests
 ./test-inso.sh
 ```
 
