@@ -59,10 +59,11 @@ See full example:
 |[network] Response failed req=req_50a8af2d27cf4a1db623a5595e5bcfef err=Error: Couldn't resolve host name|&ensp;&ensp;&ensp;`<system-err>Error: Couldn't resolve host name</system-err>`|
 
 ## Known Limitations
-1) The `/testsuite/timestamp` JUnit XPath is not set (because it's not available in `ìnso CLI` report). However the `/testsuites/timestamp` JUnit XPath is correctly set (it's the creation date file of `ìnso CLI` report); the converter uss the local time zone
+1) The `/testsuite/timestamp` JUnit XPath is not set (because it's not available in `ìnso CLI` report). However the `/testsuites/timestamp` JUnit XPath is correctly set (it's the file creation date of `ìnso CLI` report); the converter uses the local time zone
 2) The `skipped` and `error` result elements are not set (because they are not available in `ìnso CLI` report). However the `failures` and `tests` are correctly set for `/testsuites` and `/testsuites/testsuite`
-3) This converter works only for collection (i.e. `inso collection run` and not `inso collection test`)
-4) This converter works only for `--reporter spec` (The `spec` is the default reporter)
+3) The `time` element is not set (because it's are not available in `ìnso CLI` report)
+4) This converter works only for collection (i.e. `inso collection run` and not `inso collection test`)
+5) This converter works only for the default reporter of `inso CLI` (i.e. `--reporter spec`)
 
 ## How to test the converter
 ```shell
