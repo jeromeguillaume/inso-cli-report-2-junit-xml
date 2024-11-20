@@ -11,17 +11,17 @@ git clone https://github.com/jeromeguillaume/inso-cli-report-2-junit-xml.git
 cd ./inso-cli-report-2-junit-xml
 ```
 
-## How to build `inso-cli-report-2-junit-xml`
+## How to build the Converter
 ```shell
 javac -d bin ./src/com/kong/insoclireport2junitxml/*
 jar --create --file bin/InsoCliJunit.jar --manifest bin/META-INF/MANIFEST.MF -C bin/ .
 ```
 
-## How to run `inso-cli-report-2-junit-xml`
+## How to run the Converter
 ```shell
 java -jar bin/InsoCliJunit.jar --input ./samples/inso-cli-report.log --output ./samples/inso-cli-junit.xml
 ```
-The exit code of the program is:
+The exit code of the Converter is:
 - `0`: no error
 - `1`: error (and the Exception stack trace is sent to `stdout`)
 
@@ -33,6 +33,7 @@ How to get the exit code for:
 See full example:
 - `inso CLI` input: [inso-cli-report.log](/samples/inso-cli-report.log)
 - `JUnit XML` output: [inso-cli-junit.xml](/samples/inso-cli-junit.xml)
+
 ### Inso Test passed
 |Input: `inso CLI`|Output: `JUnit XML`|
 |:---------|:----------|
@@ -51,3 +52,18 @@ See full example:
 |:---------|:----------|
 |Running request: /uuid req_50a8af2d27cf4a1db623a5595e5bcfef|`<testsuite failures="1" name="/uuid.req_50a8af2d27cf4a1db623a5595e5bcfef" tests="1">`|
 |[network] Response failed req=req_50a8af2d27cf4a1db623a5595e5bcfef err=Error: Couldn't resolve host name|&ensp;&ensp;&ensp;`<system-err>Error: Couldn't resolve host name</system-err>`|
+
+## Known Limitations
+1) The `/testsuite/timestamp` JUnit XPath is not set (because it's not available in `ìnso CLI` report). However the `/testsuites/timestamp` JUnit XPath is correctly set (it's the creation date file of `ìnso CLI` report); the converter uss the local time zone
+2) The `skipped` and `error` result elements are not set (because they are not available in `ìnso CLI` report). However the `failures` and `tests` are correctly set for `/testsuites` and `/testsuites/testsuite`
+3) This converter works only for collection (i.e. `inso collection run` and not `inso collection test`)
+4) This converter works only for `--reporter spec` (The `spec` is the default reporter)
+
+## How to test the converter
+```shell
+cd ./inso-cli-report-2-junit-xml/tests
+./test-inso.sh
+```
+
+## Changelog
+- v1.0.0: Initial release
