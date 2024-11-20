@@ -30,7 +30,7 @@ inso run collection wrk_***TO_BE_REPLACED*** > inso-cli-report.log
 
 Then convert the `ìnso CLI` report to `JUnit XML`
 ```shell
-java -jar bin/InsoCliJunit.jar --input ./samples/inso-cli-report.log --output ./samples/inso-cli-junit.xml
+java -jar bin/InsoCliJunit.jar --input inso-cli-report.log --output inso-cli-junit.xml
 ```
 The exit code of the Converter is:
 - `0`: no error
