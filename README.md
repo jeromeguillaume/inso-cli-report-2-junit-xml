@@ -17,6 +17,11 @@ javac -d bin ./src/com/kong/insoclireport2junitxml/*
 jar --create --file bin/InsoCliJunit.jar --manifest bin/META-INF/MANIFEST.MF -C bin/ .
 ```
 
+## How to get the Converter help
+```shell
+java -jar bin/InsoCliJunit.jar --help
+```
+
 ## How to run the Converter
 ```shell
 java -jar bin/InsoCliJunit.jar --input ./samples/inso-cli-report.log --output ./samples/inso-cli-junit.xml
