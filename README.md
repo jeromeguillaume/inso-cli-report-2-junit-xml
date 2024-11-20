@@ -25,7 +25,7 @@ java -jar bin/InsoCliJunit.jar --help
 ## How to run the Converter
 First create the `ìnso CLI` report from the collection execution
 ```shell
-inso run collection wrk_TO_BE_REPLACED > inso-cli-report.log
+inso run collection wrk_***TO_BE_REPLACED*** > inso-cli-report.log
 ```
 
 Then convert the `ìnso CLI` report to `JUnit XML`
