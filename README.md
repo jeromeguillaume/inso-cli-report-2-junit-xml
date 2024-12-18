@@ -68,8 +68,9 @@ See full example:
 1) The `/testsuite/timestamp` JUnit XPath is not set (because it's not available in `ìnso CLI` report). However the `/testsuites/timestamp` JUnit XPath is correctly set (it's the file creation date of `ìnso CLI` report); the converter uses the local time zone
 2) The `assertions`, `skipped` and `error` result elements are not set (because they are not available in `ìnso CLI` report). However the `failures` and `tests` are correctly set for `/testsuites` and `/testsuites/testsuite`
 3) The `time` element (i.e. the test duration) is not set (because it's are not available in `ìnso CLI` report)
-4) This converter works only for collection (i.e. `inso collection run` and not `inso collection test`)
-5) This converter works only for the default reporter of `inso CLI` (i.e. `--reporter spec`)
+4) The  converter doesn't take care about `Auth` error (configured in the `Auth` tab)
+5) This converter works only for collection (i.e. `inso collection run` and not `inso collection test`)
+6) This converter works only for the default reporter of `inso CLI` (i.e. `--reporter spec`)
 
 ## How to test the converter
 ```shell
